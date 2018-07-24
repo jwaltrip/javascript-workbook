@@ -68,49 +68,51 @@ console.log(); // blank line separator
 //  - this is bc some truthy types when checked will return falsy in functions like isNaN
 //  - ex: isNaN("this is a string") will return true, so should be placed AFTER the string check
 
-const checkDataType=(arg1)=>{
-  // begin checking TRUTHY data types
-  // check for Boolean type
-  if (typeof arg1 === "boolean") {
-    console.log(arg1 + " is type Boolean");
-  }
-  // check for Number type
-  // we need to check both typeof arg1 && isNaN(arg1) === "false" bc typeof NaN === "number"
-  else if (typeof arg1 === "number" && isNaN(arg1) === false) {
-    console.log(arg1 + " is type Number");
-  }
-  // check for String type
-  else if (typeof arg1 === "string") {
-    console.log(arg1 + " is type String");
-  }
-  // begin checking FALSY data types
-  // check for null type
-  else if (arg1 === null) {
-    console.log(arg1 + " is type Null");
-  }
-  // check for Undefinded type
-  else if (arg1 === undefined) {
-    console.log(arg1 + " is type Undefined");
-  }
-  // check for NaN type using isNaN method
-  else if (isNaN(arg1)) {
-    console.log(arg1 + " is type NaN");
-  }
-};
+// const checkDataType=(arg1)=>{
+//   // begin checking TRUTHY data types
+//   // check for Boolean type
+//   if (typeof arg1 === "boolean") {
+//     console.log(arg1 + " is type Boolean");
+//   }
+//   // check for Number type
+//   // we need to check both typeof arg1 && isNaN(arg1) === "false" bc typeof NaN === "number"
+//   else if (typeof arg1 === "number" && isNaN(arg1) === false) {
+//     console.log(arg1 + " is type Number");
+//   }
+//   // check for String type
+//   else if (typeof arg1 === "string") {
+//     console.log(arg1 + " is type String");
+//   }
+//   // begin checking FALSY data types
+//   // check for null type
+//   else if (arg1 === null) {
+//     console.log(arg1 + " is type Null");
+//   }
+//   // check for Undefinded type
+//   else if (arg1 === undefined) {
+//     console.log(arg1 + " is type Undefined");
+//   }
+//   // check for NaN type using isNaN method
+//   else if (isNaN(arg1)) {
+//     console.log(arg1 + " is type NaN");
+//   }
+// };
+
+const checkDataType = (arg1) => typeof arg1;
 
 // check Boolean type
-checkDataType(true);
+console.log(checkDataType(true));
 // check Null type
-checkDataType(null);
+console.log(checkDataType(null));
 // check Undefinded type
-checkDataType(undefined);
+console.log(checkDataType(undefined));
 // check Number type
-checkDataType(31);
+console.log(checkDataType(31));
 // check NaN type
 // parseInt("string not a number") will return a value of NaN
-checkDataType(parseInt("string not a number"));
+console.log(checkDataType(parseInt("string not a number")));
 // check String type
-checkDataType("Howdydoodee");
+console.log(checkDataType("Howdydoodee"));
 
 console.log(); // blank line separator
 
@@ -133,7 +135,7 @@ console.log(); // blank line separator
 // if 1 or more args !== true, do nothing
 
 const twoArgsTrue=(arg1, arg2)=>{
-  if (arg1 === true && arg2 === true) {
+  if (arg1 && arg2) {
     console.log("Both args are true");
   }
 };
@@ -153,9 +155,9 @@ console.log(); // blank line separator
 // any other case, do not run
 
 const oneTrueOneFalse=(arg1, arg2)=>{
-  if (arg1 == true && arg2 === false) {
+  if (arg1 && !arg2) {
     console.log("arg1 is True, arg2 is False");
-  } else if (arg1 === false && arg2 === true) {
+  } else if (!arg1 && arg2) {
     console.log("arg1 is False, arg2 is True");
   }
 };
@@ -176,7 +178,7 @@ console.log(); // blank line separator
 // any other case, do not print message
 
 const twoArgsFalse=(arg1, arg2)=>{
-  if (arg1 === false && arg2 === false) {
+  if (!arg1 && !arg2) {
     console.log("both arg1 and arg2 are false");
   }
 };
