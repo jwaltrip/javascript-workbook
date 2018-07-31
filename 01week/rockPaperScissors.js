@@ -9,11 +9,10 @@ const rl = readline.createInterface({
 
 /*
   Whiteboarding of Rock, Paper, Scissors game:
-
   [x] 1. User1 input of: rock, paper, or scissors
   [x] 2. User2 input of: rock, paper, or scissors
   [x] 3. Validate and sanitize user input
-  [x] 4. If (User1 AND User2 input is 'rock') OR (User1 AND User2 input is 'paper') OR (User1 AND User2 input is 'scissors'), it's a tie
+  [x] 4. If User1 input === User2 input, it's a tie
   [x] 5. If User1 input is 'rock' AND User2 input is 'scissors', User1 wins (rock beats scissors)
   [x] 6. If User1 input is 'rock' AND User2 input is 'paper', User2 wins (paper beats rock)
   [x] 7. If User1 input is 'paper' AND User2 input is 'rock', User1 wins (paper beats rock)
@@ -59,57 +58,23 @@ function rockPaperScissors(hand1, hand2) {
 
   // if both hand1 and hand2 have correct inputs
   if (isHand1Correct && isHand2Correct) {
-
-    // code to test who wins goes here
-
-    // If (User1 AND User2 input is 'rock') OR (User1 AND User2 input is 'paper') OR (User1 AND User2 input is 'scissors'), it's a tie
-    if((hand1LowerTrim == "rock" && hand2LowerTrim == "rock") || (hand1LowerTrim == "paper" && hand2LowerTrim == "paper") || (hand1LowerTrim == "scissors" && hand2LowerTrim == "scissors")) {
+    // Check for tie
+    if(hand1LowerTrim === hand2LowerTrim) {
       return "It's a tie!";
     }
-    // If User1 input is 'rock' AND User2 input is 'scissors', User1 wins
-    else if (hand1LowerTrim == "rock" && hand2LowerTrim == "scissors") {
+    // Check if hand 1 wins
+    else if ((hand1LowerTrim === "rock" && hand2LowerTrim === "scissors") || (hand1LowerTrim === "paper" && hand2LowerTrim === "rock") || (hand1LowerTrim === "scissors" && hand2LowerTrim === "paper")) {
       return "Hand one wins!";
     }
-    // If User1 input is 'rock' AND User2 input is 'paper', User2 wins
-    else if (hand1LowerTrim == "rock" && hand2LowerTrim == "paper") {
+    // Check for hand 2 wins
+    else if ((hand1LowerTrim === "rock" && hand2LowerTrim === "paper") || (hand1LowerTrim === "paper" && hand2LowerTrim === "scissors") || (hand1LowerTrim === "scissors" && hand2LowerTrim === "rock")) {
       return "Hand two wins!";
     }
-    // If User1 input is 'paper' AND User2 input is 'rock', User1 wins
-    else if (hand1LowerTrim == "paper" && hand2LowerTrim == "rock") {
-      return "Hand one wins!";
-    }
-    // If User1 input is 'paper' AND User2 input is 'scissors', User2 wins
-    else if (hand1LowerTrim == "paper" && hand2LowerTrim == "scissors") {
-      return "Hand two wins!";
-    }
-    // If User1 input is 'scissors' AND User2 input is 'paper', User1 wins
-    else if (hand1LowerTrim == "scissors" && hand2LowerTrim == "paper") {
-      return "Hand one wins!";
-    }
-    // If User1 input is 'scissors' AND User2 input is 'rock', User2 wins
-    else if (hand1LowerTrim == "scissors" && hand2LowerTrim == "rock") {
-      return "Hand two wins!";
-    }
-
   }
   // if hand1 and/or hand2 do NOT have correct inputs
   else {
-
-    // if both hand1 and hand2 is NOT 'rock', 'paper', or 'scissors', print error message
-    if (isHand1Correct == false && isHand2Correct == false) {
-      return 'ERROR: both Hand1 and Hand2 did not enter correct value of: "rock", "paper", or "scissors" (case in-sensitive)';
-    }
-
-    // if only hand1 is NOT 'rock', 'paper', or 'scissors', print error message
-    if (isHand1Correct == false) {
-      return 'ERROR: Hand1 did not enter correct value of: "rock", "paper", or "scissors" (case in-sensitive)';
-    }
-
-    // if only hand2 is NOT 'rock', 'paper', or 'scissors', print error message
-    if (isHand2Correct == false) {
-      return 'ERROR: Hand2 did not enter correct value of: "rock", "paper", or "scissors" (case in-sensitive)';
-    }
-
+    // return error message
+    return "Error:  Incorrect input";
   }
 }
 
