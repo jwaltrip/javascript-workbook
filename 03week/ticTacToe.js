@@ -19,11 +19,7 @@ let whichPlayerWin = null;
 
 // toggles current player turn
 function switchPlayer() {
-  if (playerTurn === 'X') {
-    playerTurn = 'O';
-  } else {
-    playerTurn = 'X';
-  }
+  playerTurn = (playerTurn === 'X') ? 'O' : 'X';
 }
 
 function printBoard() {
@@ -39,19 +35,13 @@ function printBoard() {
 // returns true/false
 // if true, sets global whichPlayerWin var
 function horizontalWin() {
-  // value to be returned
-  let isWin = false;
+  let isWin = false; // value to be returned
 
   // iterate over each row in board
   board.forEach((row) => {
-    // if player X won
-    if (row[0] === 'X' && row[1] === 'X' && row[2] === 'X') {
+    if ((row[0] === 'X' && row[1] === 'X' && row[2] === 'X') || (row[0] === 'O' && row[1] === 'O' && row[2] === 'O')) {
       isWin = true;
-      whichPlayerWin = 'X'; // set which player won
-    } // if player O won
-    else if (row[0] === 'O' && row[1] === 'O' && row[2] === 'O') {
-      isWin = true;
-      whichPlayerWin = 'O'; // set which player won
+      whichPlayerWin = (row[0] === 'X') ? 'X' : 'O'; // set which player won
     }
   });
 
@@ -62,21 +52,14 @@ function horizontalWin() {
 // returns true/false
 // if true, sets global whichPlayerWin var
 function verticalWin() {
-  // value to be returned
-  let isWin = false;
+  let isWin = false; // value to be returned
 
   // iterate over each col in board
   // wasnt sure how to do this in a forEach loop
   for (let i = 0; i <= 2; i++) {
-    // if player X won
-    if (board[0][i] === 'X' && board[1][i] === 'X' && board[2][i] === 'X') {
+    if ((board[0][i] === 'X' && board[1][i] === 'X' && board[2][i] === 'X') || (board[0][i] === 'O' && board[1][i] === 'O' && board[2][i] === 'O')) {
       isWin = true;
-      whichPlayerWin = 'X'; // set which player won
-      break;
-    } // if player O won
-    else if (board[0][i] === 'O' && board[1][i] === 'O' && board[2][i] === 'O') {
-      isWin = true;
-      whichPlayerWin = 'O'; // set which player won
+      whichPlayerWin = (board[0][i] === 'X') ? 'X' : 'O'; // set which player won
       break;
     }
   }
@@ -88,8 +71,7 @@ function verticalWin() {
 // returns true/false
 // if true, sets global whichPlayerWin var
 function diagonalWin() {
-  // value to be returned
-  let isWin = false;
+  let isWin = false; // value to be returned
 
   // if player X has diagonal win (both directions)
   if ((board[0][0] === 'X' && board[1][1] === 'X' && board[2][2] === 'X') || (board[0][2] === 'X' && board[1][1] === 'X' && board[2][0] === 'X')) {
@@ -145,12 +127,10 @@ function resetBoard() {
 
 // banner to display when a player wins
 function winBanner() {
-  // console.log(`\n------------------------`);
   console.log(`\n========================`);
   console.log(`Player ${whichPlayerWin} wins!\n`);
   printBoard();
   console.log(`\nResetting the board`);
-  // console.log(`------------------------\n`);
   console.log(`========================\n`);
 }
 
@@ -176,15 +156,12 @@ function ticTacToe(row, column) {
 
       // check for horizontal, vertical, or diagonal WIN
       if ( checkForWin() ) {
-        // show win banner/board
-        winBanner();
-        // reset board
-        resetBoard();
+        winBanner(); // show win banner/board
+        resetBoard(); // reset board
 
       } // no win, continue game
       else {
-        // switch player
-        switchPlayer();
+        switchPlayer(); // switch player
       }
     } // else cannot place move at location entered
     else {
