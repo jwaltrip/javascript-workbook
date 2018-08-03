@@ -6,6 +6,6 @@ function printListOfOlympians(inputArr) {
   });
 }
 
-const names = ['Jake', 'Christelle', 'Lori', 'UsainBolt', 'Olympus'];
+const names = ['Jake', 'Christelle', 'Lori', 'MichaelPhelps', 'Olympus'];
 
 printListOfOlympians(names);
