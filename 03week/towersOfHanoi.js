@@ -13,16 +13,16 @@ let stacks = {
   c: []
 };
 
-// let stacks = {
-//   a: [1],
-//   b: [],
-//   c: [4, 3, 2]
-// };
-
+// function to sanitize user input
+// returns a lower case, trimmed string
 function sanitizeInput(input) {
   return input.toLowerCase().trim();
 }
 
+// validates user input
+// returns true/false
+// TRUE: if input is: a, b, c
+// FALSE: otherwise
 function validateInput(startStack, endStack) {
   const start = sanitizeInput(startStack);
   const end = sanitizeInput(endStack);
@@ -30,12 +30,16 @@ function validateInput(startStack, endStack) {
   return ((start === 'a' || start === 'b' || start === 'c') && (end === 'a' || end === 'b' || end === 'c'));
 }
 
+// prints the current stacks object
 function printStacks() {
   console.log("a: " + stacks.a);
   console.log("b: " + stacks.b);
   console.log("c: " + stacks.c);
 }
 
+// moves a piece from one stack to the other
+// will only move piece if the move isLegal
+// does not return anything
 function movePiece(startStack, endStack) {
   // Your code here
   const start = sanitizeInput(startStack);
@@ -47,8 +51,12 @@ function movePiece(startStack, endStack) {
   }
 }
 
+// determines whether a move is legal or not
+// returns true/false
+// TRUE: if stack is empty OR if current piece on endstack is greater size than piece being moved
+// FALSE: if piece being moved is greater than piece on endstack
 function isLegal(startStack, endStack) {
-  // Your code here
+  // Sanitize user input
   const start = sanitizeInput(startStack);
   const end = sanitizeInput(endStack);
 
@@ -62,16 +70,21 @@ function isLegal(startStack, endStack) {
   }
 }
 
+// checks for win
+// win = pieces placed largest -> smallest on either b or c stack
+// returns true/false
 function checkForWin() {
   return ((stacks.c[0] === 4 && stacks.c[1] === 3 && stacks.c[2] === 2 && stacks.c[3] === 1) || (stacks.b[0] === 4 && stacks.b[1] === 3 && stacks.b[2] === 2 && stacks.b[3] === 1));
 }
 
+// win banner to display once a user wins
 function winBanner() {
   console.log("\n========================");
   console.log("WIN!!!");
   console.log("========================\n");
 }
 
+// resets the global vars (and therefor the game)
 function resetGame() {
   stacks = {
     a: [4, 3, 2, 1],
@@ -83,34 +96,37 @@ function resetGame() {
 /*
   WHITEBOARD
 
-  [] sanitize input
-  [] validate move - isLegal()
-  [] IF: legal move, then movePiece()
-  [] ELSE: console log illegal move
+  [x] sanitize input
+  [x] validate move - isLegal()
+  [x] IF: legal move, then movePiece()
+  [x] ELSE: console log illegal move
 
 
  */
 
 function towersOfHanoi(startStack, endStack) {
-  // Your code here
-
   const start = sanitizeInput(startStack);
   const end = sanitizeInput(endStack);
 
-  if ( isLegal(start, end) ) {
-    movePiece(start, end);
+  // if user input is valid
+  if ( validateInput(start, end) ) {
+    // if stack move is a legal move
+    if ( isLegal(start, end) ) {
+      movePiece(start, end);
 
-    if ( checkForWin() ) {
-      winBanner();
-      resetGame();
+      // if user wins after movePiece(), show win banner and reset game
+      if ( checkForWin() ) {
+        winBanner();
+        resetGame();
+      }
+    } // else, illegal move
+    else {
+      console.log("\nIllegal move\n");
     }
-  } // else, illegal move
+  } // else, not valid input: NOT a, b, c
   else {
-    console.log("\nIllegal move\n");
+    console.log("\nInvalid input\n");
   }
-
-  // movePiece(startStack, endStack);
-  // console.log("is win? = ", checkForWin());
 }
 
 function getPrompt() {
@@ -134,7 +150,6 @@ if (typeof describe === 'function') {
       assert.deepEqual(stacks, { a: [4, 3, 2], b: [1], c: [] });
     });
   });
-
   describe('#isLegal()', () => {
     it('should not allow an illegal move', () => {
       stacks = {
