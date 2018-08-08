@@ -108,6 +108,7 @@ function resetGame() {
 
  */
 
+// main function
 function towersOfHanoi(startStack, endStack) {
   const start = sanitizeInput(startStack);
   const end = sanitizeInput(endStack);
@@ -178,6 +179,21 @@ if (typeof describe === 'function') {
       assert.equal(checkForWin(), true);
       stacks = { a: [1], b: [4, 3, 2], c: [] };
       assert.equal(checkForWin(), false);
+    });
+  });
+  // user written tests
+  describe('#validateInput()', () => {
+    it('should only accept: a, b, c as input', () => {
+      assert.equal(validateInput('A', 'b'), true);
+      assert.equal(validateInput('d', 'x'), false);
+    });
+  });
+
+  describe('#resetGame()', () => {
+    it('should reset the board to initial state', () => {
+      stacks = { a: [1], b: [4, 3], c: [2] };
+      resetGame();
+      assert.deepEqual(stacks, { a: [4, 3, 2, 1], b: [], c: [] });
     });
   });
 
