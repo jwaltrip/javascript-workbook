@@ -41,10 +41,11 @@ function printStacks() {
 // will only move piece if the move isLegal
 // does not return anything
 function movePiece(startStack, endStack) {
-  // Your code here
+  // sanitize user input
   const start = sanitizeInput(startStack);
   const end = sanitizeInput(endStack);
 
+  // if is a legal move, then move piece
   if ( isLegal(start, end) ) {
     const piece = stacks[start].pop();
     stacks[end].push(piece);
@@ -60,12 +61,15 @@ function isLegal(startStack, endStack) {
   const start = sanitizeInput(startStack);
   const end = sanitizeInput(endStack);
 
+  // get the lengths of the start and end arrays
   const startLen = stacks[start].length;
   const endLen = stacks[end].length;
 
+  // if stack is empty, then good to move piece
   if (endLen === 0) {
     return true;
   } else {
+    // if current piece on endstack is greater size than piece being moved
     return (stacks[end][endLen - 1] > stacks[start][startLen - 1]);
   }
 }
