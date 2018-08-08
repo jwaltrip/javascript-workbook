@@ -23,13 +23,15 @@ function findFirstVowel(userInput) {
   // return variable. will contain index of first vowel found
   let vowelIndex = -1;
 
+  const vowels = ['a', 'e', 'i', 'o', 'u'];
+
   // loop over user input array of chars
   for (let i = 0; i < inputArr.length; i++) {
     // check to see if current char is a vowel
     // if so, set vowelIndex and break out of loop
-    if (inputArr[i] === 'a' || inputArr[i] === 'e' || inputArr[i] === 'i' || inputArr[i] === 'o' || inputArr[i] === 'u') {
+    if (vowels.includes(inputArr[i])) {
       vowelIndex = i;
-      break; // break out of the loop since we found the first vowel
+      break;
     }
   }
 
