@@ -14,22 +14,27 @@ let solution = '';
 let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 let turns = 1;
 
+// checks for win
+// returns true/false
 function checkForWin(guess) {
   return (guess === solution);
 }
 
+// win banner to display when user wins
 function winBanner() {
   console.log("\n===============".green);
   console.log("YOU WIN!!!".green);
   console.log("===============\n".green);
 }
 
+// lose banner to display when user loses
 function loseBanner() {
   console.log("\n===============".red);
   console.log("YOU LOSE...  :(".red);
   console.log("===============\n".red);
 }
 
+// resets game/global vars
 function resetGame() {
   board = [];
   solution = 'abcd';
@@ -37,24 +42,39 @@ function resetGame() {
   turns = 0;
 }
 
+// check to make sure input is correct length (4 chars) and are letters a-h
+// returns true/false
 function isValidInput(input) {
   const inptCln = sanitizeInput(input);
+  // create arr of chars from input
   const inptArr = inptCln.split('');
+  // return value
   let isValid = false;
 
+  // check to make sure input is correct length
   if (inptArr.length === 4) {
-    inptArr.forEach((char, i) => {
-      isValid = letters.includes(char);
-    });
+    // iterate over each char in input, and make sure it's
+    for (let i = 0; i < inptArr.length; i++) {
+      // if current char is not a-h, break out of loop and return false
+      if (!letters.includes(inptArr[i])) {
+        isValid = false;
+        break;
+      } else {
+        isValid = true;
+      }
+    }
   }
 
   return isValid;
 }
 
+// converts input to lower case and trims whitespace
+// returns string
 function sanitizeInput(input) {
   return input.toLowerCase().trim();
 }
 
+// prints board (all guesses) and the current # of turn
 function printBoard() {
   for (let i = 0; i < board.length; i++) {
     console.log(board[i]);
@@ -78,6 +98,9 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+// generates a string hint based on user guess
+// string is formatted "0-0" -> "${correctLetterAndLocation}-${correctLetterWrongLocation}"
+// returns string hint
 function generateHint(guess) {
   // create char array from solution and guess
   const guessArr = guess.split('');
@@ -106,29 +129,32 @@ function generateHint(guess) {
     }
   });
 
-  const hintString = `${correctLetterLocations}`.red + `-${correctLetters}`;
-
-  return hintString;
-
+  return `${correctLetterLocations}`.red + `-${correctLetters}`;
 }
 
+// main function
 function mastermind(guess) {
   solution = 'abcd'; // Comment this out to generate a random solution
 
   const guessCln = sanitizeInput(guess);
 
+  // check to make sure input is 4 chars long & letters a-h
   if ( isValidInput(guessCln) ) {
+    // generate hint and push it to the board
     const hintStr = generateHint(guessCln) + " | " + guessCln;
     board.push(hintStr);
 
     // if win, show win banner & reset game
     if ( checkForWin(guessCln) ) {
+      // show win banner and reset game
       winBanner();
       resetGame();
     } else if (turns === 10) {
+      // user lost, show lose banner and reset game
       loseBanner();
       resetGame();
     } else {
+      // increase # of turns. Is global var
       turns++;
     }
   } // else, invalid input
