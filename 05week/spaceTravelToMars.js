@@ -10,6 +10,51 @@ let jobTypes = {
 };
 
 // Your code here
+// class CrewMember individual will have: name, job, specialSkill, ship=will be assigned when crew member is added to ship
+//
+// class Ship wiil have: name, type, ability
+// methods:
+// Ship.missionStatement() -- if Ship has no crew members, then return "Can't perform a mission yet."
+//                       if Ship DOES have a crew member (using CrewMember.enterShip(shipVar)), return Ship.ability
+//
+
+
+class CrewMember {
+  constructor(name, job, specialSkill) {
+    this.name = name;
+    this.job = job;
+    this.specialSkill = specialSkill;
+    this.ship = null; // this will be assigned by the enterShip() method (not by the constructor)
+  }
+
+  enterShip(ship) {
+    // assign CrewMember class the Ship it's entering
+    this.ship = ship;
+    // add this CrewMember class instance to the Ship.crew array
+    ship.crew.push(this);
+  }
+}
+
+class Ship {
+  constructor(name, type, ability) {
+    this.name = name;
+    this.type = type;
+    this.ability = ability;
+    this.crew = [];
+  }
+
+  missionStatement() {
+    // if crew has a length
+    if (this.crew.length === 1) {
+      return this.crew[0].ability;
+    } else {
+      return "Can't perform a mission yet.";
+    }
+  }
+}
+
+
+
 
 //tests
 if (typeof describe === 'function'){
