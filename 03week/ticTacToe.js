@@ -107,9 +107,6 @@ function updateBoard(row, col) {
   if (board[row][col] === ' ') {
     board[row][col] = playerTurn;
     return true;
-  } // if location user chose is occupied
-  else {
-    return false;
   }
 }
 
