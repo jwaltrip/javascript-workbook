@@ -45,11 +45,9 @@ function movePiece(startStack, endStack) {
   const start = sanitizeInput(startStack);
   const end = sanitizeInput(endStack);
 
-  // if is a legal move, then move piece
-  if ( isLegal(start, end) ) {
-    const piece = stacks[start].pop();
-    stacks[end].push(piece);
-  }
+  // move the piece
+  const piece = stacks[start].pop();
+  stacks[end].push(piece);
 }
 
 // determines whether a move is legal or not
@@ -65,13 +63,8 @@ function isLegal(startStack, endStack) {
   const startLen = stacks[start].length;
   const endLen = stacks[end].length;
 
-  // if stack is empty, then good to move piece
-  if (endLen === 0) {
-    return true;
-  } else {
-    // if current piece on endstack is greater size than piece being moved
-    return (stacks[end][endLen - 1] > stacks[start][startLen - 1]);
-  }
+  // if end stack is empty OR current piece on endstack is greater size than piece being moved
+  return (endLen === 0) || (stacks[end][endLen - 1] > stacks[start][startLen - 1]);
 }
 
 // checks for win
