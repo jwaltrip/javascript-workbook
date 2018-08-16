@@ -9,14 +9,30 @@ let jobTypes = {
   programmer: 'Any Ship!'
 };
 
-// Your code here
-// class CrewMember individual will have: name, job, specialSkill, ship=will be assigned when crew member is added to ship
-//
-// class Ship wiil have: name, type, ability
-// methods:
-// Ship.missionStatement() -- if Ship has no crew members, then return "Can't perform a mission yet."
-//                       if Ship DOES have a crew member (using CrewMember.enterShip(shipVar)), return Ship.ability
-//
+/* WHITEBOARD
+
+class CrewMember
+  PROPERTIES:
+    name - string - value assigned in constructor
+    job - string - value assigned in constructor
+    specialSkill - string - value assigned in constructor
+    ship - value will be assigned as null in constructor - will be updated when assigned to a Ship by CrewMember.enterShip() method
+  METHODS:
+    enterShip(Ship) - will assign CrewMember.ship = the instance of Ship it's entering
+                    - will add this CrewMember class instance to the Ship.crew array
+                    - does not return value
+
+class Ship
+  PROPERTIES:
+    name - string - value assigned in constructor
+    type - string - value assigned in constructor
+    ability - string - value assigned in constructor
+    crew - array of CrewMembers - value assigned as empty array in constructor
+  METHODS:
+    missionStatement() - if Ship has no crew members, then return "Can't perform a mission yet."
+                       - if Ship DOES have 1+ crew members (using CrewMember.enterShip(shipVar)), return Ship.ability
+                       - returns string
+*/
 
 
 class CrewMember {
@@ -28,7 +44,7 @@ class CrewMember {
   }
 
   enterShip(ship) {
-    // assign CrewMember class the Ship it's entering
+    // assign CrewMember.ship = the instance of Ship it's entering
     this.ship = ship;
     // add this CrewMember class instance to the Ship.crew array
     ship.crew.push(this);
@@ -44,10 +60,11 @@ class Ship {
   }
 
   missionStatement() {
-    // if crew has a length
-    if (this.crew.length === 1) {
-      return this.crew[0].ability;
-    } else {
+    // if crew has a length > 0, then return this.ability
+    if (this.crew.length > 0) {
+      return this.ability;
+    } // else, no crew on ship, cannot perform a mission
+    else {
       return "Can't perform a mission yet.";
     }
   }
