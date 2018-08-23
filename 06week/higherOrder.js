@@ -3,11 +3,40 @@
 const assert = require('assert');
 
 function forEach(arr, callback) {
-  // Your code here
+  // loop thru each item in array
+  for (let i=0; i<arr.length; i++) {
+    // console.log current item in array
+    console.log(arr[i]);
+
+    // if callback parameter is provided
+    // then call the callback fn with the current array item as param
+    if (callback) {
+      console.log("callback present");
+
+      callback(arr[i]);
+    }
+  }
 }
 
 function map(arr, callback) {
-  // Your code here
+  // new array to be returned
+  let returnArr = [];
+
+  // loop over every item in array
+  for (let i=0; i<arr.length; i++) {
+    console.log(arr[i]);
+
+    // if callback parameter is provided
+    if (callback) {
+      console.log("callback present");
+
+      // push the new mutated value to the return array
+      returnArr.push(callback(arr[i]));
+    }
+  }
+
+  // return new array
+  return returnArr;
 }
 
 function filter(arr, callback) {
