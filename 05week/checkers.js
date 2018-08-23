@@ -12,7 +12,7 @@ const rl = readline.createInterface({
 
 Checkers
 
-class Board
+class Boards
   PROPERTIES:
     this.grid = []
       - holds the current state of the board and it's pieces
