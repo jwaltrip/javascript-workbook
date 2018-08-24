@@ -25,12 +25,15 @@ const sumEvens = nums.filter(num => {
 
 console.log(sumEvens);
 
-/*
+
 // Find the index of the first "Austin" value (the value plus its index equals 512)
-const atxIdx;
+const atxIdx = nums.findIndex((num, idx) => {
+  return (num + idx === 512);
+});
 
 console.log(`index: ${atxIdx}, value: ${nums[atxIdx]}`);
 
+/*
 const weather = [
   { id: 5743823523151872,
     weather_state_name: "Light Cloud",
