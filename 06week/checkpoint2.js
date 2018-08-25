@@ -33,7 +33,7 @@ const atxIdx = nums.findIndex((num, idx) => {
 
 console.log(`index: ${atxIdx}, value: ${nums[atxIdx]}`);
 
-/*
+
 const weather = [
   { id: 5743823523151872,
     weather_state_name: "Light Cloud",
@@ -102,10 +102,19 @@ const weather = [
 ];
 
 //using a higher order function, create an array of the unique 'weather_state_name' values of the weather array. Your function should return the following array ['Light Cloud', 'Heavy Cloud', 'Showers']
-const weatherStates = console.log(weatherStates);
+const weatherStates = weather.reduce((acc, item) => {
+  // check to make sure 'weather_state_name' is in current object AND current 'weather_state_name' is not already in acc
+  // then push current 'weather_state_name' to acc
+  if (item.weather_state_name && acc.indexOf(item.weather_state_name) === -1) {
+    acc.push(item.weather_state_name);
+  }
+  return acc;
+}, []);
+
+console.log(weatherStates);
 
 //find the id of the object in weather that has a min_temp of 15.915
-
+/*
 const idealTemp = console.log(idealTemp);
 
 */
