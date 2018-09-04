@@ -2,16 +2,73 @@
 
 const assert = require('assert');
 
+// forEach loops over each item in an array
+// returns undefined
 function forEach(arr, callback) {
-  // Your code here
+  // loop thru each item in array
+  for (let i=0; i<arr.length; i++) {
+    // console.log current item in array
+    console.log(arr[i]);
+
+    // if callback parameter is provided
+    // then call the callback fn with the current array item as param
+    if (callback) {
+      console.log("callback present");
+
+      callback(arr[i]);
+    }
+  }
 }
 
+// map loops over each item in an array
+// returns a new array based on the return value of the callback
 function map(arr, callback) {
-  // Your code here
+  // new array to be returned
+  const returnArr = [];
+
+  // loop over every item in array
+  for (let i=0; i<arr.length; i++) {
+    console.log(arr[i]);
+
+    // if callback parameter is provided
+    if (callback) {
+      console.log("callback present");
+
+      // push the new mutated value to the return array
+      returnArr.push(callback(arr[i]));
+    }
+  }
+
+  // return new array
+  return returnArr;
 }
 
+// filter will filter array items based on a return eval
+// returns a new array including items that passed the evaluation in the callback
 function filter(arr, callback) {
-  // Your code here
+  // new array to be returned
+  const returnArr = [];
+
+  // loop over every item in array
+  for (let i=0; i<arr.length; i++) {
+    // console.log(arr[i]);
+
+    // if callback parameter is provided
+    if (callback) {
+      // console.log("callback present");
+
+      // check to see if the current array item returned from callback fn is the same as current array item
+      const callbackReturn = callback(arr[i]);
+
+      // if callbackReturn is true, then push current item to returnArr
+      if ( callbackReturn ) {
+        returnArr.push(arr[i]);
+      }
+    }
+  }
+
+  // return new array
+  return returnArr;
 }
 
 function some(arr, callback) {
