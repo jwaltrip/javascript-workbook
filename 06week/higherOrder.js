@@ -24,7 +24,7 @@ function forEach(arr, callback) {
 // returns a new array based on the return value of the callback
 function map(arr, callback) {
   // new array to be returned
-  let returnArr = [];
+  const returnArr = [];
 
   // loop over every item in array
   for (let i=0; i<arr.length; i++) {
@@ -47,7 +47,7 @@ function map(arr, callback) {
 // returns a new array including items that passed the evaluation in the callback
 function filter(arr, callback) {
   // new array to be returned
-  let returnArr = [];
+  const returnArr = [];
 
   // loop over every item in array
   for (let i=0; i<arr.length; i++) {
